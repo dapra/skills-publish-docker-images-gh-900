@@ -38,14 +38,14 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ghcr.io/dapra/skills-publish-docker-images-gh-900/stackoverflown
-
+          tags: ${{ steps.meta.outputs.tags }}
+          
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: |${{ steps.meta.outputs.tags }}
-           # ghcr.io/dapra/skills-publish-docker-images-gh-900/stackoverflown:main
-           # ghcr.io/dapra/skills-publish-docker-images-gh-900/stackoverflown:${{ github.sha }}
-           
+          tags: |
+            ghcr.io/dapra/skills-publish-docker-images-gh-900/stackoverflown:main
+            ghcr.io/dapra/skills-publish-docker-images-gh-900/stackoverflown:${{ github.sha }}
